@@ -1,0 +1,162 @@
+* {
+    margin: 0%;
+    margin-left: 0px;
+}
+
+body {
+    /* background: linear-gradient(#E8E9EB, #d6d6d6); */
+    background-image: url('../assets/party.png');
+    background-repeat: repeat;
+    background-size: cover;
+}
+
+
+:root {
+    --speed: 3;
+}
+
+.machine {
+    /* background: linear-gradient(#84008e, #6b016f); */
+    background: linear-gradient(#540e59, #fc98ff);
+
+    border: solid black 3px;
+    height: 300px;
+    width: 900px;
+    margin: 50px;
+
+    z-index: 5;
+
+    display: flex;
+}
+
+
+
+.slot {
+    height: 250px;
+    width: 250px;
+    margin: 20px;
+
+    overflow: hidden;
+
+    z-index: 1;
+    background-color: rgb(216, 216, 216);
+    border: solid black 4px;
+    text-align: center;
+    line-height: 2 50px;
+    position: relative;
+
+}
+
+.slot>.value {
+    z-index: 3;
+    animation-name: slotspin;
+    animation-iteration-count: infinite;
+    animation-duration: calc(1s / var(--speed));
+    height: fit-content;
+    position: absolute;
+    top: 1em !important;
+
+}
+
+@keyframes slotspin {
+    0% {
+        transform: translateY(-170px);
+    }
+
+    100% {
+        transform: translateY(200px)
+    }
+}
+
+
+
+
+.value>img {
+    width: 120px;
+    height: 150px !important;
+    position: relative;
+    top: 1px;
+}
+
+#winnerTable {
+    margin-top: 50px;
+    background: linear-gradient(#84008e, #6b016f);
+}
+
+.thWinners {
+    background: linear-gradient(#540e59, #fc98ff);
+
+}
+
+
+
+
+/* CSS push animation button */
+.button {
+    position: relative;
+    display: inline-block;
+    margin: 30px;
+}
+
+.button a {
+    color: white;
+    font-family: Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 36px;
+    text-align: center;
+    text-decoration: none;
+    background: linear-gradient(#540e59, #fc98ff);
+    display: block;
+    position: relative;
+    padding: 20px 40px;
+
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    text-shadow: 0px 1px 0px #000;
+    filter: dropshadow(color=#000, offx=0px, offy=1px);
+
+    -webkit-box-shadow: inset 0 1px 0 #FFE5C4, 0 10px 0 #fc98ff;
+    -moz-box-shadow: inset 0 1px 0 #FFE5C4, 0 10px 0 #fc98ff;
+    box-shadow: inset 0 1px 0 #FFE5C4, 0 10px 0 #fc98ff;
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.button a:active {
+    top: 10px;
+    background-color: #F78900;
+
+    -webkit-box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #fc98ff;
+    -moz-box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3pxpx 0 #fc98ff;
+    box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #fc98ff;
+}
+
+.button:after {
+    content: "";
+    height: 100%;
+    width: 100%;
+    padding: 4px;
+    position: absolute;
+    bottom: -15px;
+    left: -4px;
+    z-index: -1;
+    background-color: #2B1800;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+/* Modal window */
+#showNumber {
+    display: block;
+    margin: auto;
+    width: 10rem;
+    height: 2rem;
+}
+
+:modal {
+    background-color: beige;
+    border: 2px solid burlywood;
+    border-radius: 5px;
+}
