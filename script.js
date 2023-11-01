@@ -170,8 +170,8 @@ window.addEventListener("beforeunload", () => {
 })
 let btndiv = document.getElementById('btnDiv');
 if (localStorage.getItem('savedGiveAway') && GiveAwayHistory.length == 0 && localStorage.getItem('participantsLeft') && localStorage.getItem('prizesLeft')) {
-    btndiv.innerHTML = `<div class="col-xl-4">
-        <button type="button" onclick="RestoreGiveAway()" class="btn btn-primary">
+    btndiv.innerHTML = `<div>
+        <button type="button" onclick="RestoreGiveAway()" class="btn btn-primary" style=" width: 200px; height: 100px;font-size:2rem">
         Cargar sorteo
         </button>
       </div>`
@@ -186,6 +186,8 @@ if (localStorage.getItem('savedGiveAway') && GiveAwayHistory.length == 0 && loca
         GiveAwayHistory = restoredGiveAway;
         participants = participantsLeft;
         prizes = prizesLeft
+        console.log(participants);
+        console.log(prizes);
     }
 } else { } //pass
 
