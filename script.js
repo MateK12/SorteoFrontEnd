@@ -85,7 +85,7 @@ function Spin() {
         participants.splice(randomIndex, 1);
 
         setTimeout(() => {
-            images[i].setAttribute('src', `./assets/images/premio${randomprize.tipo}.png`)
+            images[i].setAttribute('src', `./assets/img/premio${randomprize.tipo}.png`)
             values[i].style.animationName = 'none'
 
             personReels[i].style.animationName = 'none'
