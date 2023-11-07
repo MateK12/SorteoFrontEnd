@@ -4,6 +4,8 @@ let winnerBoard = document.getElementById('winnerboard');
 
 let tableCounter = 0;
 
+console.log(API);
+
 async function GetLastRaffle() {
     let GetRaffle = await fetch(`${API}/getLastRaffle`);
     let LastRaffle = await GetRaffle.json();

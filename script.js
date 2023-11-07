@@ -81,8 +81,6 @@ function Spin() {
         participants.push(randomWinner);
         prizes.splice(randomIndexPrices, 1);
         participants.splice(randomIndex, 1);
-        console.log(prizes.length);
-        console.log(participants.length);
         SaveWinners(randomWinner.nombre, randomprize.premio, randomWinner.Empresa)
 
         setTimeout(() => {
@@ -139,10 +137,8 @@ const storeHistory = async function SaveHistory(body = { 'name': 'marcos', 'prem
                 console.log('an error ocurred ' + response);
             })
         let res = await saveHistory;
-        console.log(res);
 
     } catch (error) {
-        console.log('an error ocurred: ' + error);
     }
 
 }
@@ -186,14 +182,12 @@ if (localStorage.getItem('savedGiveAway') && GiveAwayHistory.length == 0 && loca
         for (let i = 0; i < restoredGiveAway.length; i++) {
             insertTR(restoredGiveAway[i].nombre, restoredGiveAway[i].premio, restoredGiveAway[i].empresa)
         }
-        console.log("fasdfas" + participantsLeft.length);
-        console.log("n,mnm,n" + prizesLeft.length);
+
 
         GiveAwayHistory = restoredGiveAway;
         participants = participantsLeft;
         prizes = prizesLeft
-        console.log(participants);
-        console.log(prizes);
+
     }
 } else { } //pass
 
