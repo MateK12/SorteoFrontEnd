@@ -7,6 +7,8 @@
   <title>Sorteo fin de año</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+
   <link rel="stylesheet" href="./styles/index.css">
   <link rel="shortcut icon" href="./assets/img/favicon.ico" type="image/x-icon">
 
@@ -16,7 +18,35 @@
 <body>
   <div>
     <div class="row">
-      <div style="text-align: center; align-items: center; width: fit-content;">
+      <div class="col-xl-4"></div>
+      <div class="col-xl-4"
+        style="justify-content: center; text-align: center; justify-content: center; color: white; margin-top: 10px;">
+        <h1>Sorteo de fin de año</h1>
+      </div>
+      <div class="col-xl-4">
+        <div id="btnDiv" style="align-items: center; text-align: center; justify-content: center; margin-top: 10px;"
+          class="col-xl-12" data-toggle="tooltip" data-placement="bottom"
+          title="Cargar el sorteo como estaba antes de refrescar la pagina">
+
+        </div>
+      </div>
+
+    </div>
+    <div>
+    </div>
+    <div class="row">
+
+      <dialog id="favDialog">
+        <form method="dialog" style="text-align: center; justify-content: center; align-items: center;">
+          <h3>El sorteo ha terminado ¡Felicidades a los ganadores!</h3>
+          <button id="SaveHistoryButton" class="btn btn-primary">
+            <a href="./winnerTable.html" target="_blank" style="color: black; text-decoration: none;">
+              Aceptar
+            </a>
+          </button>
+        </form>
+      </dialog>
+      <div style="text-align: center; align-items: center;" class="col-xl-6 col-lg-12">
         <div class=" machine">
           <div class="slot" id="slot1">
             <div class="value" id="value1"><img id='img1' src="./assets/img/luck.png" alt=""></div>
@@ -38,49 +68,44 @@
         <div class="machine">
           <div class="slot" id="slot1">
             <div class="value" id="value6"><img src="./assets/img/person.png" alt="">
-              <p id="nameTag1"></p>
+              <p class="nameTag" id="nameTag1"></p>
             </div>
           </div>
           <div class="slot" id="slot2">
             <div class="value" id="value7"><img src="./assets/img/person.png" alt="">
-              <p id="nameTag2"></p>
+              <p class="nameTag" id="nameTag2"></p>
             </div>
           </div>
           <div class="slot" id="slot3">
             <div class="value" id="value8"><img src="./assets/img/person.png" alt="">
-              <p id="nameTag3"></p>
+              <p class="nameTag" id="nameTag3"></p>
 
             </div>
           </div>
           <div class="slot" id="slot2">
             <div class="value" id="value9"><img src="./assets/img/person.png" alt="">
-              <p id="nameTag4"></p>
+              <p class="nameTag" id="nameTag4"></p>
             </div>
           </div>
           <div class="slot" id="slot3">
             <div class="value" id="value10"><img src="./assets/img/person.png" alt="">
-              <p id="nameTag5"></p>
+              <p class="nameTag" id="nameTag5"></p>
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-xl-12">
-            <div id="pushButton" class="button">
-              <a>Parar</a>
-            </div>
-          </div>
-          <div id="btnDiv" style="align-items: center; text-align: center; justify-content: center;" class="col-xl-12">
 
-          </div>
+
+        <div id="pushButton" class="button">
+          <a>Parar</a>
         </div>
 
       </div>
-      <div class="col-xl-4">
-        <table class="table table-dark table-striped" id="winnerTable">
+      <div class="col-xl-6 col-lg-12">
+        <table class="table table-dark table-striped" id="winnerTable" style="width: 100%;font-size: 1.7rem;">
           <thead>
             <tr>
-              <th class=" thWinners" scope="col">Nombre</th>
-              <th class="thWinners" scope="col">Apellido</th>
+              <th class="thWinners" scope="col">#</th>
+              <th class="thWinners" scope="col">Nombre</th>
               <th class="thWinners" scope="col">Empresa</th>
               <th class="thWinners" scope="col">Premio</th>
             </tr>
@@ -91,14 +116,8 @@
         </table>
 
       </div>
-
-      <dialog id="favDialog">
-        <form method="dialog" style="text-align: center; justify-content: center; align-items: center;">
-          <h3>El sorteo ha terminado ¡Felicidades a los ganadores!</h3>
-          <button id="SaveHistoryButton" class="btn btn-primary">Aceptar</button>
-        </form>
-      </dialog>
     </div>
+
 
   </div>
   </div>

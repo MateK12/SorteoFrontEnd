@@ -42,9 +42,11 @@ let participants = []
 
 let winners = [];
 
-let values = [value1, value2, value3, value4, value5]
+let tableCounter = 0;
 
-let GiveAwayHistory = []
+let values = [value1, value2, value3, value4, value5];
+
+let GiveAwayHistory = [];
 let BtnSaveHistory = document.getElementById('SaveHistoryButton');
 
 function getRandomValue() {
@@ -65,24 +67,23 @@ function updateAnimation(newSpeed) {
     }, 1000 / newSpeed)
 }
 function Spin() {
-    if (prizes.length == 0) {
-        favDialog.showModal();
-        return;
-    }
+
     for (let i = 0; i < 5; i++) {
         values[i].style.animationName = 'slotspin';
         personReels[i].style.animationName = 'slotspin'
     }
     for (let i = 0; i < 5; i++) {
-        const randomIndex = Math.floor(Math.random() * prizes.length);
-
-        const randomprize = prizes[randomIndex];
+        const randomIndex = Math.floor(Math.random() * participants.length);
+        const randomIndexPrices = Math.floor(Math.random() * prizes.length)
+        const randomprize = prizes[randomIndexPrices];
         const randomWinner = participants[randomIndex];
 
         participants.push(randomWinner);
-
-        prizes.splice(randomIndex, 1);
+        prizes.splice(randomIndexPrices, 1);
         participants.splice(randomIndex, 1);
+        console.log(prizes.length);
+        console.log(participants.length);
+        SaveWinners(randomWinner.nombre, randomprize.premio, randomWinner.Empresa)
 
         setTimeout(() => {
             images[i].setAttribute('src', `./assets/img/premio${randomprize.tipo}.png`)
@@ -92,33 +93,37 @@ function Spin() {
             values[i].style.position = 'relative'
             personReels[i].style.position = 'relative'
             values[i].style.top = `1px`
-            nameTags[i].innerHTML = randomWinner.Nombre + ' ' + randomWinner.Apellidos
-            insertTR(randomWinner.Nombre, randomWinner.Apellidos, randomprize.premio, randomWinner.Empresa)
-            SaveWinners(randomWinner.Nombre, randomWinner.Apellidos, randomprize.premio, randomWinner.Empresa)
+            nameTags[i].innerHTML = randomWinner.nombre
 
+            insertTR(randomWinner.nombre, randomprize.premio, randomWinner.Empresa)
+            if (prizes.length == 0) {
+                setTimeout(() => {
+                    favDialog.showModal();
+                }, 5000)
+                return;
+            }
         }, 1000 * (i + 1))
 
     }
 }
 
-function insertTR(name, lastName, prize, location) {
+function insertTR(fullname, prize, location) {
     let rowToInsert = document.createElement('tr');
+    tableCounter = tableCounter + 1;
     rowToInsert.innerHTML = `  <tr>
-    <td>${name}</td>
-    <td>${lastName}</td>    
+    <td>${tableCounter}</td>
+    <td>${fullname}</td>    
     <td>${location}</td>
     <td>${prize}</td>
   </tr>`
     winnerBoard.appendChild(rowToInsert)
 }
-function SaveWinners(name, lastName, prize, location) {
-    console.log({ 'nombre': name, 'apellido': lastName, 'premio': prize, 'empresa': location });
-    GiveAwayHistory.push({ 'nombre': name, 'apellido': lastName, 'premio': prize, 'empresa': location });
+function SaveWinners(fullname, prize, location) {
+    GiveAwayHistory.push({ 'nombre': fullname, 'premio': prize, 'empresa': location });
 }
 
 const storeHistory = async function SaveHistory(body = { 'name': 'marcos', 'premio': 'heladera' }) {
     try {
-        console.log('button pushed');
         const PostRequestOptions = {
             method: 'POST',
             headers: {
@@ -148,7 +153,6 @@ async function GetPrizesAndParticipants() {
     let prizesResponse = await GetPrices.json();
     participants = ParticipantsResponse.data;
     prizes = prizesResponse.data;
-
 }
 GetPrizesAndParticipants();
 
@@ -171,8 +175,8 @@ window.addEventListener("beforeunload", () => {
 let btndiv = document.getElementById('btnDiv');
 if (localStorage.getItem('savedGiveAway') && GiveAwayHistory.length == 0 && localStorage.getItem('participantsLeft') && localStorage.getItem('prizesLeft')) {
     btndiv.innerHTML = `<div>
-        <button type="button" onclick="RestoreGiveAway()" class="btn btn-primary" style=" width: 200px; height: 100px;font-size:2rem">
-        Cargar sorteo
+        <button class="button" onclick="RestoreGiveAway()" style="background-color:rgb(90, 16, 92);border: none;">
+        <a>Cargar sorteo</a>
         </button>
       </div>`
     let restoredGiveAway = JSON.parse(localStorage.getItem('savedGiveAway'));
@@ -180,9 +184,11 @@ if (localStorage.getItem('savedGiveAway') && GiveAwayHistory.length == 0 && loca
     let prizesLeft = JSON.parse(localStorage.getItem('prizesLeft'));
     function RestoreGiveAway() {
         for (let i = 0; i < restoredGiveAway.length; i++) {
-            console.log(restoredGiveAway[i]);
-            insertTR(restoredGiveAway[i].nombre, restoredGiveAway[i].apellido, restoredGiveAway[i].premio, restoredGiveAway[i].empresa)
+            insertTR(restoredGiveAway[i].nombre, restoredGiveAway[i].premio, restoredGiveAway[i].empresa)
         }
+        console.log("fasdfas" + participantsLeft.length);
+        console.log("n,mnm,n" + prizesLeft.length);
+
         GiveAwayHistory = restoredGiveAway;
         participants = participantsLeft;
         prizes = prizesLeft
@@ -193,3 +199,4 @@ if (localStorage.getItem('savedGiveAway') && GiveAwayHistory.length == 0 && loca
 
 //modal window
 const favDialog = document.getElementById('favDialog');
+
