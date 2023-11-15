@@ -78,9 +78,11 @@ function Spin() {
         const randomprize = prizes[randomIndexPrices];
         const randomWinner = participants[randomIndex];
 
-        participants.push(randomWinner);
         prizes.splice(randomIndexPrices, 1);
         participants.splice(randomIndex, 1);
+        console.log("length of: " + participants.length);
+        console.log("length of: " + prizes.length);
+
         SaveWinners(randomWinner.nombre, randomprize.premio, randomWinner.Empresa)
 
         setTimeout(() => {
