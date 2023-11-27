@@ -34,6 +34,7 @@ let img5 = document.getElementById('img5');
 let images = [img1, img2, img3, img4, img5]
 //#endregion
 
+
 let winnerBoard = document.getElementById('winnerboard');
 
 let prizes = []
@@ -78,13 +79,13 @@ function Spin() {
     for (let i = 0; i < 5; i++) {
         valid = valid + 1;
         const randomIndex = Math.floor(Math.random() * participants.length);
-        const randomIndexPrices = Math.floor(Math.random() * prizes.length)
+        const randomIndexPrices = Math.floor(Math.random() * prizes.length);
         const randomprize = prizes[randomIndexPrices];
         const randomWinner = participants[randomIndex];
         participants.splice(randomIndex, 1);
-        prizes.splice(randomIndexPrices, 1)
+        prizes.splice(randomIndexPrices, 1);
 
-        SaveWinners(randomWinner.nombre, randomprize.premio, randomWinner.Empresa)
+        SaveWinners(randomWinner.nombre, randomprize.premio, randomWinner.Empresa);
         setTimeout(() => {
             images[i].setAttribute('src', `./assets/img/premio${randomprize.tipo}.png`)
             values[i].style.animationName = 'none'
@@ -119,7 +120,8 @@ function insertTR(fullname, prize, location) {
     <td>${location}</td>
     <td>${prize}</td>
   </tr>`
-    winnerBoard.appendChild(rowToInsert)
+    let referrence = winnerBoard.firstElementChild;
+    winnerBoard.insertBefore(rowToInsert, referrence)
 }
 function SaveWinners(fullname, prize, location) {
     GiveAwayHistory.push({ 'nombre': fullname, 'premio': prize, 'empresa': location });
