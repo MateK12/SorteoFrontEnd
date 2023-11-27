@@ -28,4 +28,8 @@ function insertTR(fullname, prize, location) {
   </tr>`
     winnerBoard.appendChild(rowToInsert)
 }
-GetLastRaffle()
+setTimeout(() => {
+    GetLastRaffle()
+}, 5000)
+
+

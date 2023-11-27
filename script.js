@@ -49,6 +49,8 @@ let values = [value1, value2, value3, value4, value5];
 let GiveAwayHistory = [];
 let BtnSaveHistory = document.getElementById('SaveHistoryButton');
 
+let counter = 0;
+let valid = 1;
 function getRandomValue() {
     return values[Math.floor(Math.random() * 7)]
 }
@@ -72,19 +74,17 @@ function Spin() {
         values[i].style.animationName = 'slotspin';
         personReels[i].style.animationName = 'slotspin'
     }
+    console.log(prizes);
     for (let i = 0; i < 5; i++) {
+        valid = valid + 1;
         const randomIndex = Math.floor(Math.random() * participants.length);
         const randomIndexPrices = Math.floor(Math.random() * prizes.length)
         const randomprize = prizes[randomIndexPrices];
         const randomWinner = participants[randomIndex];
-
-        prizes.splice(randomIndexPrices, 1);
         participants.splice(randomIndex, 1);
-        console.log("length of: " + participants.length);
-        console.log("length of: " + prizes.length);
+        prizes.splice(randomIndexPrices, 1)
 
         SaveWinners(randomWinner.nombre, randomprize.premio, randomWinner.Empresa)
-
         setTimeout(() => {
             images[i].setAttribute('src', `./assets/img/premio${randomprize.tipo}.png`)
             values[i].style.animationName = 'none'
@@ -103,6 +103,9 @@ function Spin() {
                 return;
             }
         }, 1000 * (i + 1))
+
+
+
 
     }
 }
@@ -160,7 +163,9 @@ BtnSaveHistory.addEventListener('click', () => storeHistory(GiveAwayHistory))
 
 //Save give away before refreshing
 
-window.addEventListener("beforeunload", () => {
+window.addEventListener("beforeunload", (e) => {
+    e.preventDefault();
+    e.returnValue = "";
     if (GiveAwayHistory.length > 0) {
         localStorage.setItem('savedGiveAway', JSON.stringify(GiveAwayHistory))
         localStorage.setItem('participantsLeft', JSON.stringify(participants))
